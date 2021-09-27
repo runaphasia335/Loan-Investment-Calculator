@@ -1,0 +1,80 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<TabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:QuickInterest.ViewModel"
+             xmlns:vm1="clr-namespace:QuickInterest.ViewModel"
+             x:Class="QuickInterest.View.MainPage">
+  <!--Pages can be added as references or inline-->
+
+  <ContentPage Title="Investment"  BindingContext="{Binding Source={StaticResource vm}}">
+      <ContentPage.Resources>
+          <ResourceDictionary>
+              <vm:MainPageVM x:Key="vm"/>
+          </ResourceDictionary>
+      </ContentPage.Resources>
+      <ContentPage.Content>
+          <StackLayout>
+            <Label Text="Welcome to CalcuRate"  HorizontalTextAlignment="Center" FontSize="Large"/>
+            <Entry x:Name="principalEntry" Placeholder="Enter Principal" Keyboard="Numeric" Text="{Binding PrincipalAmount, Mode=TwoWay}" />
+            <Entry x:Name="monthsEntry" Placeholder="Enter # of Months" Keyboard="Numeric" Text="{Binding Term, Mode=TwoWay}"/>
+            <Entry x:Name="interestEntry" Placeholder="Enter Interest Rate" Keyboard="Numeric" Text="{Binding InterestRate, Mode=TwoWay}"/>
+
+              <Picker x:Name="compoundsPicker" Title="Number of Compounds" ItemDisplayBinding="{Binding Key}"
+                      ItemsSource="{Binding compoundsList}" SelectedItem="{Binding SelectedItem}"/>
+
+            <Button Text="Calculate" Command="{Binding CalculateInterestCommand}"/>
+            <Label x:Name="resultsLabel" HorizontalTextAlignment="Center" FontSize="Large" FontAttributes="Bold" Text="{Binding DisplayResults , Mode=TwoWay}" />
+
+          </StackLayout>
+      </ContentPage.Content>
+      </ContentPage>
+
+
+
+  <ContentPage Title="Loan" BindingContext="{Binding Source={StaticResource vm1}}">
+      <ContentPage.Resources>
+          <ResourceDictionary>
+              <vm1:LoanPageVM x:Key="vm1"/>
+          </ResourceDictionary>
+      </ContentPage.Resources>
+      <ContentPage.Content>
+          <StackLayout>
+   
+            <Label Text="Welcome to CalcuRate"  HorizontalTextAlignment="Center" FontSize="Large"/>
+
+             <!--<Picker x:Name="loanPicker" Title="Payment or Payoff">
+                 <Picker.ItemsSource>
+                     <x:Array Type="{x:Type x:String}">
+                         <x:String>Payment</x:String>
+                         <x:String>Payoff</x:String>
+                     </x:Array>
+                 </Picker.ItemsSource>
+                 <Picker.Triggers>
+                     <DataTrigger TargetType="Entry"
+                 </Picker.Triggers>
+             </Picker>-->
+
+             
+
+            <Entry x:Name="principalLoanEntry" Placeholder="Enter Principal" Keyboard="Numeric" Text="{Binding PrincipalLoanAmount, Mode=TwoWay}" />
+
+            <Entry x:Name="remainingTermLoanEntry" Placeholder="Enter # Of Months Remaining" Keyboard="Numeric" Text="{Binding RemainingTermLoan, Mode=TwoWay}"/>
+
+            <Entry x:Name="termLoanEntry" Placeholder="Enter Loan Term(Months)" Keyboard="Numeric" Text="{Binding TermLoan, Mode=TwoWay}"/>
+
+            <Entry x:Name="interestLoanEntry" Placeholder="Enter Interest Rate" Keyboard="Numeric" Text="{Binding InterestLoan, Mode=TwoWay}"/>
+
+            <Entry x:Name="paymentLoanEntry" Placeholder="Enter Monthly Payment" Keyboard="Numeric" Text="{Binding MonthlyPayments, Mode=TwoWay}"/>
+
+             <Entry x:Name="additionalPaymentLoanEntry" Placeholder="Enter Additional Principal" Keyboard="Numeric" Text="{Binding AdditionalPrincipal, Mode=TwoWay}"/>
+        
+            <Button Text="Calculate" Command="{Binding CalculatePayoffCommand}"/>
+            <Label x:Name="resultsLoan" HorizontalTextAlignment="Center" FontSize="Large" FontAttributes="Bold" Text="{Binding DisplayLoanResults, Mode=TwoWay}" />
+
+          </StackLayout>
+      </ContentPage.Content>
+
+
+  </ContentPage>
+  <!--<ContentPage Title="Tab 3" />-->
+</TabbedPage>
